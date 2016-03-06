@@ -78,9 +78,14 @@ void MIN_HEAP_INSERT(int *A,int key){
 	HEAP_DECREASE_KEY(A,HeapSize,key);
 }
 
+void MIN_HEAP_DELETE(int *A,int i){
+	A[i]=A[HeapSize];
+	HeapSize--;
+	MIN_HEAPIFY(A,i);
+}
 int main(){
 	FILE *fp;
-	if((fp=fopen("6.5-3_input.txt","r"))==NULL){
+	if((fp=fopen("6.5-3_6.5.8_input.txt","r"))==NULL){
 		printf("not open!");
 		return 0;
 	}
@@ -128,10 +133,26 @@ int main(){
 		}
 	}
 	printf("\n");
-	//HEAP_SORT(a);
 	
-	//for(int i=1;i<=ArraySize;i++)
-	//printf("%d ",a[i]);
+	MIN_HEAP_DELETE(a,3);
+	
+	printf("delete a number:\n");
+	n=2;
+	for(int i=1;i<=HeapSize;i++){	
+		printf("%d ",a[i]);
+		if(i>=n-1){
+			printf("\n");
+			n*=2;
+		}
+	}
+	printf("\n");
+	
+	int size=HeapSize;
+	HEAP_SORT(a);
+	
+	printf("heap sort:\n");
+	for(int i=1;i<=size;i++)
+	printf("%d ",a[i]);
 	
 	return 0;
 }
